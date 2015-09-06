@@ -1,7 +1,7 @@
 package com.github.vonnagy.service.container.metrics
 
 import com.codahale.metrics.MetricRegistry
-import net.liftweb.json.DefaultFormats
+import org.json4s.DefaultFormats
 import org.specs2.mutable.Specification
 
 class MetricsWriterSpec extends Specification {

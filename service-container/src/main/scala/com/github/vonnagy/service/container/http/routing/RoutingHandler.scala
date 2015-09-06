@@ -4,7 +4,7 @@ import akka.actor.ActorRefFactory
 import com.github.vonnagy.service.container.http.routing.Rejection.{DuplicateRejection, NotFoundRejection}
 import com.github.vonnagy.service.container.http.{DefaultMarshallers, RejectionResponse}
 import com.github.vonnagy.service.container.log.LoggingAdapter
-import net.liftweb.json.Serialization
+import org.json4s.jackson.Serialization
 import spray.http.StatusCodes._
 import spray.http.{ContentType, HttpEntity, HttpResponse, MediaTypes}
 import spray.routing._

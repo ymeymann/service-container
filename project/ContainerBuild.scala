@@ -7,7 +7,7 @@ object ContainerBuild extends Build {
   val SPRAY_VERSION = "1.3.3"
   val CONFIG_VERSION = "1.3.0"
   val METRICS_VERSION = "3.1.2"
-  val LIFT_VERSION = "2.6.2"
+  val JSON4S_VERSION = "3.2.11"
   val SPECS_VERSION = "3.6.1"
   val JDK = "1.8"
 
@@ -58,6 +58,7 @@ object ContainerBuild extends Build {
       val sprayHttp       = "io.spray"              %%  "spray-http"        % SPRAY_VERSION
       val sprayHttpx      = "io.spray"              %%  "spray-httpx"       % SPRAY_VERSION
       val sprayRouting    = "io.spray"              %%  "spray-routing"     % SPRAY_VERSION
+      val sprayJson       = "io.spray"              %%  "spray-json"        % "1.3.2"
       val config          = "com.typesafe"          %   "config"            % CONFIG_VERSION
       val akkaActor       = "com.typesafe.akka"     %%  "akka-actor"        % AKKA_VERSION
       val akkaSlf4j       = "com.typesafe.akka"     %%  "akka-slf4j"        % AKKA_VERSION
@@ -65,8 +66,9 @@ object ContainerBuild extends Build {
       val slf4j           = "org.slf4j"             %   "slf4j-api"         % "1.7.12"
       val logback         = "ch.qos.logback"        %   "logback-classic"   % "1.1.3"
       val slf4jOverLog4j  = "org.slf4j"             %   "log4j-over-slf4j"  % "1.7.12"
-      val liftJson        = "net.liftweb"           %%  "lift-json"         % LIFT_VERSION
-      val liftExt         = "net.liftweb"           %%  "lift-json-ext"     % LIFT_VERSION
+      val json4sCore      = "org.json4s"            %%  "json4s-core"       % JSON4S_VERSION
+      val json4sJackson   = "org.json4s"            %%  "json4s-jackson"    % JSON4S_VERSION
+      val json4sExt       = "org.json4s"            %%  "json4s-ext"        % JSON4S_VERSION
       val metricsCore     = "io.dropwizard.metrics" %   "metrics-core"      % METRICS_VERSION
       val metricsJvm      = "io.dropwizard.metrics" %   "metrics-jvm"       % METRICS_VERSION
       val joda            = "joda-time"             %   "joda-time"         % "2.8.1"
@@ -89,12 +91,12 @@ object ContainerBuild extends Build {
     import Dependencies.Test._
 
     val akka = Seq(akkaActor, akkaSlf4j, akkaRemote)
-    val spray = Seq(sprayCan, sprayHttp, sprayHttpx, sprayRouting)
-    val lift = Seq(liftJson, liftExt)
+    val spray = Seq(sprayCan, sprayHttp, sprayHttpx, sprayRouting, sprayJson)
+    val json4s = Seq(json4sCore, json4sJackson, json4sExt)
     val logging = Seq(logback, slf4j, slf4jOverLog4j)
     val metrics = Seq(metricsCore, metricsJvm)
 
-    val base = akka ++ spray ++ lift ++ logging ++ metrics ++ Seq(joda)
+    val base = akka ++ spray ++ json4s ++ logging ++ metrics ++ Seq(joda)
     val test = Seq(akkaTest, sprayTest, specsCore, specsMock, scalazStream)
 
     val core = base ++ test

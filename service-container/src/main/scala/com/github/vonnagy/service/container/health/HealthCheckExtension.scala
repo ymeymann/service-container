@@ -7,7 +7,7 @@ import scala.collection.mutable
 class HealthCheckExtension(system: ExtendedActorSystem) extends Extension {
 
 
-  implicit val formats = net.liftweb.json.DefaultFormats
+  implicit val formats = org.json4s.DefaultFormats
 
   /** The application wide registry. */
   private val registry: mutable.Buffer[HealthCheck] = mutable.Buffer()

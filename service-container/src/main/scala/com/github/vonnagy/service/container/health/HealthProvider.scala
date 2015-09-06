@@ -4,9 +4,9 @@ import akka.actor.ActorSystem
 import akka.util.Timeout
 import com.github.vonnagy.service.container.health.HealthState._
 import com.github.vonnagy.service.container.log.LoggingAdapter
-import net.liftweb.json.Extraction
-import net.liftweb.json.ext.{EnumNameSerializer, JodaTimeSerializers}
 import org.joda.time.DateTime
+import org.json4s.Extraction
+import org.json4s.ext.{EnumNameSerializer, JodaTimeSerializers}
 
 import scala.collection.mutable
 import scala.concurrent.duration._
@@ -18,7 +18,7 @@ trait HealthProvider extends LoggingAdapter {
   implicit val system: ActorSystem
   implicit val executor: ExecutionContext
 
-  implicit val formats = net.liftweb.json.DefaultFormats + new EnumNameSerializer(HealthState) ++ JodaTimeSerializers.all
+  implicit val formats = org.json4s.DefaultFormats + new EnumNameSerializer(HealthState) ++ JodaTimeSerializers.all
   implicit val timeout = Timeout(5 seconds)
 
   val alerts: mutable.Buffer[HealthRollup] = mutable.Buffer()
